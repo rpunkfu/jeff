@@ -19,13 +19,12 @@ $ jeff mit # Outputs mit license content, with user credentials.
 
 #### Advanced usage:
 
-Argument name | usage | Default value | Description
----        | ---         | ---                 | ---
-`name` | *boolean*   | `false`             | Specifies if the audio should play when page loads.
-`year`   | `en-US`, `en-GB`, `es-ES`, `fr-FR`, `it-IT`, `de-DE`, `ja-JP`, `ko-KR`, `zh-CN`    | `en-US`    | Specifies the language to be synthesized and spoken.
-`email`     | *string*    | `You are awesome`   | Specifies the text to be synthesized and spoken.
-
-
+Argument name   | usage         | Default value                         | Description
+---             | ---           | ---                                   | ---
+`name`          | -n, --name    | [`getpass.getuser()`](goo.gl/feOHre)  | Specifies License owner's name.
+`year`          | -y, --year    | `date.today().year`                   | Specifies License's year.
+`email`         | -e, --email   | `''`                                  | Specifies License owner's email.
+`project name`  | -p, --project | `''`                                  | Specifies Project's name.
 
 ## License
 
