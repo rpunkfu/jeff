@@ -27,7 +27,7 @@ import getpass
 from datetime import date
 
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
-LICENSES_DIR = os.path.join(ROOT_DIR, "_licenses")
+LICENSES_DIR = os.path.join(ROOT_DIR, "licenses")
 LICENSES_FILES = os.listdir(LICENSES_DIR)
 
 
