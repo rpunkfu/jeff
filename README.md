@@ -2,10 +2,6 @@
 
 CLI tool for generating `LICENSE` files, based on user input.
 
-
-![Jeff in action!](http://i.imgur.com/UrhjbWM.gifv)
-
-
 #### Installation:
 
 ```bash
