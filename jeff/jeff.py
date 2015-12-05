@@ -1,4 +1,4 @@
-"""
+r"""
     _____  ________  ________  ________
    |_   _||_   __  ||_   __  ||_   __  |
      | |    | |_ \_|  | |_ \_|  | |_ \_|
@@ -9,7 +9,8 @@
 Usage:
   jeff ls | list
   jeff -h | --help
-  jeff [options] LICENSE_NAME
+  jeff -v | --version
+  jeff [options] [LICENSE_NAME]
 
 Options:
   -h --help                 Show this screen.
@@ -36,6 +37,7 @@ def _get_license_names():
 
 
 def _fill_license(license_template, arguments):
+    """Fill license template with arguments."""
     credentials = {
         "[project]": arguments["--project"] or "",
         "[email]": arguments["--email"] or "",
@@ -50,21 +52,23 @@ def _fill_license(license_template, arguments):
 
 
 def _fetch_license_template(license_name):
-    """Open license file and return its content."""
+    """Open license file and return its raw content."""
     license_file = os.path.join(LICENSES_DIR, license_name)
     with open(license_file) as license:
         return license.read()
 
 
-def _get_filled_license(license_name, credentials):
+def _get_filled_license(license_name, arguments):
+    """Return license filled with credentials from docopt arguments."""
     if license_name not in LICENSES_FILES:
         return "License with name '{0}' was not found.".format(license_name)
 
     license_template = _fetch_license_template(license_name)
-    return _fill_license(license_template, credentials)
+    return _fill_license(license_template, arguments)
 
 
-if __name__ == "__main__":
+def main():
+    """Jeff generates license file based on user input."""
     arguments = docopt.docopt(__doc__, version="Jeff 1.0.0")
 
     if arguments["ls"] or arguments["list"]:
@@ -73,3 +77,7 @@ if __name__ == "__main__":
         print(_get_filled_license(arguments["LICENSE_NAME"], arguments))
     else:
         print(__doc__)
+
+
+if __name__ == "__main__":
+    main()
