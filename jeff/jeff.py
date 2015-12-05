@@ -28,12 +28,12 @@ from datetime import date
 
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 LICENSES_DIR = os.path.join(ROOT_DIR, "licenses")
-LICENSES_FILES = os.listdir(LICENSES_DIR)
+LICENSES_NAMES = os.listdir(LICENSES_DIR)
 
 
 def _get_license_names():
     """Nicely formatted string with available licenses."""
-    return "Available licenses:\n{0}".format(", ".join(LICENSES))
+    return "Available licenses:\n{0}".format(", ".join(LICENSES_NAMES))
 
 
 def _fill_license(license_template, arguments):
@@ -60,7 +60,7 @@ def _fetch_license_template(license_name):
 
 def _get_filled_license(license_name, arguments):
     """Return license filled with credentials from docopt arguments."""
-    if license_name not in LICENSES_FILES:
+    if license_name not in LICENSES_NAMES:
         return "License with name '{0}' was not found.".format(license_name)
 
     license_template = _fetch_license_template(license_name)
