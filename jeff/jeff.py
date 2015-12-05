@@ -7,23 +7,27 @@
 `.____.'  |________||_____|   |_____|
 
 Usage:
-  jeff (ls|list)
-  jeff [LICENSE_NAME]
+  jeff ls | list
+  jeff -h | --help
+  jeff [options] LICENSE_NAME
 
 Options:
-  -h --help     Show this screen.
-  --version     Show version.
-
+  -h --help                 Show this screen.
+  -n --name NAME            Name of license owner.
+  -y --year YEAR            Year of license.
+  -e --email EMAIL          Email of license owner.
+  -p --project PROJECT      Project's name.
+  --version                 Show version.
 """
+
 import os
 import docopt
 import getpass
 from datetime import date
 
 ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
-LICENSES_DIR = os.path.join(ROOT_DIR, '_licenses')
-LICENSES_RAW = os.listdir(LICENSES_DIR)
-LICENSES = [license.replace(".txt", "") for license in LICENSES_RAW]
+LICENSES_DIR = os.path.join(ROOT_DIR, "_licenses")
+LICENSES_FILES = os.listdir(LICENSES_DIR)
 
 
 def _get_license_names():
@@ -31,39 +35,41 @@ def _get_license_names():
     return "Available licenses:\n{0}".format(", ".join(LICENSES))
 
 
-def _fill_license(license_content, credentials):
-    info_email = credentials["email"] or ""
-    info_name = credentials["name"] or getpass.getuser()
-    info_year = credentials["year"] or date.today().year
+def _fill_license(license_template, arguments):
+    credentials = {
+        "[project]": arguments["--project"] or "",
+        "[email]": arguments["--email"] or "",
+        "[name]": arguments["--name"] or getpass.getuser(),
+        "[year]": arguments["--year"] or str(date.today().year)
+    }
 
-    license_content.replace("[fullname]", info_name)
-    license_content.replace("[year]", info_year)
-    license_content.replace("[email]", info_email)
-    license_content.replace("<email>", info_email)
+    for placeholder, value in credentials.items():
+        license_template = license_template.replace(placeholder, value)
 
-    return license_content
- 
+    return license_template
 
-def _fetcnh_license_template(license_name):
+
+def _fetch_license_template(license_name):
     """Open license file and return its content."""
-    license_file = os.path.join(LICENSES_DIR, license_name + ".txt")
+    license_file = os.path.join(LICENSES_DIR, license_name)
     with open(license_file) as license:
         return license.read()
 
 
-def _get_filled_license(license_name):
-    if license_name not in LICENSES:
+def _get_filled_license(license_name, credentials):
+    if license_name not in LICENSES_FILES:
         return "License with name '{0}' was not found.".format(license_name)
 
     license_template = _fetch_license_template(license_name)
+    return _fill_license(license_template, credentials)
 
 
-if __name__ == '__main__':
-    arguments = docopt.docopt(__doc__, version='Jeff 1.0.0')
+if __name__ == "__main__":
+    arguments = docopt.docopt(__doc__, version="Jeff 1.0.0")
 
     if arguments["ls"] or arguments["list"]:
         print(_get_license_names())
     elif arguments["LICENSE_NAME"]:
-        print(_get_filled_license(arguments["LICENSE_NAME"]))
+        print(_get_filled_license(arguments["LICENSE_NAME"], arguments))
     else:
         print(__doc__)
