@@ -22,7 +22,7 @@ $ jeff mit # Outputs mit license content, with user credentials.
 Argument name   | usage         | Default value                         | Description
 ---             | ---           | ---                                   | ---
 `name`          | -n, --name    | [`getpass.getuser()`](goo.gl/feOHre)  | Specifies License owner's name.
-`year`          | -y, --year    | `date.today().year`                   | Specifies License's year.
+`year`          | -y, --year    | [`date.today().year`](goo.gl/47kuL3)  | Specifies License's year.
 `email`         | -e, --email   | `''`                                  | Specifies License owner's email.
 `project name`  | -p, --project | `''`                                  | Specifies Project's name.
 
