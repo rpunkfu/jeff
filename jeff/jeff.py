@@ -39,16 +39,13 @@ def _get_license_names():
 def _fill_license(license_template, arguments):
     """Fill license template with arguments."""
     credentials = {
-        "[project]": arguments["--project"] or "",
-        "[email]": arguments["--email"] or "",
-        "[name]": arguments["--name"] or getpass.getuser(),
-        "[year]": arguments["--year"] or str(date.today().year)
+        "project": arguments["--project"] or "",
+        "email": arguments["--email"] or "",
+        "name": arguments["--name"] or getpass.getuser(),
+        "year": arguments["--year"] or str(date.today().year)
     }
 
-    for placeholder, value in credentials.items():
-        license_template = license_template.replace(placeholder, value)
-
-    return license_template
+    return license_template.format(**credentials)
 
 
 def _fetch_license_template(license_name):
