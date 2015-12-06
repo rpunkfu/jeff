@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jeff',
-    version='0.1.1',
+    version='0.2.0',
     description='Jeff generates license file from the command line.',
     author='Oskar Cieslik',
     author_email='oskar.cieslik@gmail.com',
@@ -14,6 +14,9 @@ setup(
     keywords=['license', 'github', 'python', 'command line', 'cli'],
     license='MIT',
     packages=find_packages(),
+    install_requires=[
+        'docopt>=0.6.2',
+    ],
     package_data={
         'jeff': ['licenses/*']
     },
