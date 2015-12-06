@@ -42,6 +42,8 @@ $ jeff mit -ejohn.doe@example.com # Outputs mit license content, with email "joh
 $ jeff mit -p "CatJS" # Outputs mit license content, with project's name "CatJS".
 ```
 
+If you like it, maybe [tweet](http://www.twitter.com/share?url=https://github.com/oskarcieslik/jeff&hashtags=jeff.py) about it? :)
+
 
 ## License
 
