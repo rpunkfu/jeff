@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='jeff',
-    version='0.2.0',
+    version='0.3.0',
     description='Jeff generates license file from the command line.',
     author='Oskar Cieslik',
     author_email='oskar.cieslik@gmail.com',

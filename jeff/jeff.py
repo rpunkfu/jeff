@@ -66,7 +66,7 @@ def _get_filled_license(license_name, arguments):
 
 def main():
     """Jeff generates license file based on user input."""
-    arguments = docopt.docopt(__doc__, version="Jeff 0.2.0")
+    arguments = docopt.docopt(__doc__, version="Jeff 0.3.0")
 
     if arguments["ls"] or arguments["list"]:
         print(_get_license_names())
